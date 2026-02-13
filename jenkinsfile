@@ -1,0 +1,13 @@
+@Library('shared-lib') _
+
+deployMicroservice(
+    repoUrl: 'https://github.com/aquila-king/order-service.java.git',
+    imageName: 'kuunyangna/order-service',
+    namespace: 'order-namespace',
+    helmChart: './helm',
+    helmRelease: 'order-release',
+    dockerCreds: 'docker-cred',
+    jdk: 'jdk',
+    maven: 'mvn',
+    branch: 'main'
+)
