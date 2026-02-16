@@ -3,5 +3,6 @@
 deployMicroservice(
     repoUrl: 'https://github.com/aquila-king/order-service.java.git', 
     imageName: 'order-service', 
-    namespace: 'order-namespace'
+    namespace: 'order-namespace',
+    clusterName: 'aquila-cluster'
 )
