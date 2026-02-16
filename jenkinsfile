@@ -19,7 +19,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/aquila-king/order-service.java.git'
+                git branch: 'main', url: 'https://github.com/kuunyangna/CICD-Jenkins.git'
             }
         }
 
@@ -46,15 +46,14 @@ pipeline {
 
         stage('Deploy to EKS') {
             steps {
-withCredentials([usernamePassword(
-    credentialsId: 'aws-cred',
-    usernameVariable: 'AWS_ACCESS_KEY_ID',
-    passwordVariable: 'AWS_SECRET_ACCESS_KEY'
-)]) {
-{
+                withCredentials([usernamePassword(
+                    credentialsId: 'aws-cred',
+                    usernameVariable: 'AWS_ACCESS_KEY_ID',
+                    passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                )]) {
                     sh '''
                         # Update kubeconfig to connect Jenkins to your EKS cluster
-                        aws eks update-kubeconfig --region us-east-1 --name Aquila-cluster
+                        aws eks update-kubeconfig --region us-east-2 --name aquila-cluster
 
                         # Ensure we are in the repo directory
                         cd $WORKSPACE
