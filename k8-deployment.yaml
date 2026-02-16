@@ -1,22 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-deployment
-  labels:
-    app: order-service
+  name: auth-service-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: order-service
+      app: auth-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: auth-service
     spec:
       containers:
-      - name: order-service-container
-        image: kuunyangna/order-service:v2
-        imagePullPolicy: Always
+      - name: auth-service-container
+        image: kuunyangna/auth-service:v2
         ports:
-        - containerPort: 8080   # change if your Spring Boot runs on 8080
+        - containerPort: 80
