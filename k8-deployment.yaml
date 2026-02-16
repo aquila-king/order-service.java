@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-deployment
+  name: order-deployment
+  namespace: order-namespace
   labels:
-    app: order-service
+    app: order
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: order-service
+      app: order
   template:
     metadata:
       labels:
-        app: order-service
+        app: order
     spec:
       containers:
-        - name: order-service-container
-          image: kuunyangna/order-service:v2
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
+      - name: order-container
+        image: kuunyangna/order-service:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
