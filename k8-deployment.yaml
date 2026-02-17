@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-deployment
-  namespace: order-namespace
+  name: order-service-deployment    # match Jenkins pipeline
   labels:
-    app: order
+    app: order-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: order
+      app: order-service
   template:
     metadata:
       labels:
-        app: order
+        app: order-service
     spec:
       containers:
-      - name: order-container
-        image: kuunyangna/order-service:v2
+      - name: order-service-container  # match pipeline
+        image: kuunyangna/order-service:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
