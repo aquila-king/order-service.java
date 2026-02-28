@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-deployment    # match Jenkins pipeline
+  name: order-service-deployment
   labels:
     app: order-service
 spec:
@@ -15,8 +15,34 @@ spec:
         app: order-service
     spec:
       containers:
-      - name: order-service-container  # match pipeline
+      - name: order-service-container
         image: kuunyangna/order-service:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "250m"       # minimum CPU guaranteed
+            memory: "256Mi"   # minimum memory guaranteed
+          limits:
+            cpu: "500m"       # maximum CPU allowed
+            memory: "512Mi"   # maximum memory allowed
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: order-service-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: order-service-deployment
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
