@@ -1,4 +1,4 @@
-@Library('shared-lib') _  // the name of your Jenkins Shared Library configured globally
+@Library('shared-lib') _  // the name of the Jenkins Shared Library configured globally
 
 deployMicroservice(
     repoUrl: 'https://github.com/aquila-king/order-service.java.git', 
